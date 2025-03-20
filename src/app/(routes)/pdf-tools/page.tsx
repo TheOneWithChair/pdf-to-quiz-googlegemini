@@ -1,5 +1,4 @@
-"use client"; 
-
+"use client";
 import { useState } from "react";
 import { experimental_useObject } from "ai/react";
 import { questionsSchema, flashcardsSchema, matchingExerciseSchema } from "@/lib/schemas";
