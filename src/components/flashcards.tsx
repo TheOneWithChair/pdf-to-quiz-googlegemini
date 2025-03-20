@@ -3,21 +3,29 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, RefreshCw, FileText } from "lucide-react";
 import { Flashcard } from "@/lib/schemas";
+import { useRouter } from "next/navigation";
 
 type FlashcardsProps = {
   flashcards: Flashcard[];
   clearPDF: () => void;
   title: string;
+  currentIndex?: number;
+  onNext?: () => void;
+  onPrevious?: () => void;
 };
 
 export default function Flashcards({
   flashcards,
   clearPDF,
   title = "Flashcards",
+  currentIndex,
+  onNext,
+  onPrevious,
 }: FlashcardsProps) {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [currentCardIndex, setCurrentCardIndex] = useState(currentIndex || 0);
   const [flipped, setFlipped] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const router = useRouter();
 
   const handleNextCard = () => {
     if (currentCardIndex < flashcards.length - 1) {
@@ -45,6 +53,10 @@ export default function Flashcards({
     setFlipped(!flipped);
   };
 
+  const handleNewPDF = () => {
+    router.push('/api/quiz/page');
+  };
+
   if (completed) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[100dvh] p-4">
@@ -58,7 +70,7 @@ export default function Flashcards({
               <RefreshCw className="mr-2 h-4 w-4" />
               Start Over
             </Button>
-            <Button onClick={clearPDF} variant="outline" className="w-full">
+            <Button onClick={handleNewPDF} variant="outline" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
               <FileText className="mr-2 h-4 w-4" />
               Upload New PDF
             </Button>
@@ -76,7 +88,7 @@ export default function Flashcards({
           <p className="text-muted-foreground">
             There was an issue generating flashcards. Please try again.
           </p>
-          <Button onClick={clearPDF} variant="outline" className="w-full">
+          <Button onClick={handleNewPDF} variant="outline" className="w-full">
             <FileText className="mr-2 h-4 w-4" />
             Upload New PDF
           </Button>
@@ -134,12 +146,12 @@ export default function Flashcards({
           Click the card to flip it
         </p>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <Button
             onClick={handlePreviousCard}
             disabled={currentCardIndex === 0}
             variant="outline"
-            className="border-purple-200 hover:bg-purple-50 dark:border-purple-800 dark:hover:bg-purple-900/20"
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
           >
             <ChevronLeft className="h-4 w-4 mr-2" />
             Previous

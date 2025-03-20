@@ -69,45 +69,66 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
     setCurrentQuestion(nextQuestion);
   };
 
+  const handleNewPDF = () => {
+    // First try to clear the PDF if that function exists
+    if (typeof clearPDF === 'function') {
+      clearPDF();
+    }
+    
+    // Then redirect to the home page
+    router.push('/');
+  };
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-white dark:from-zinc-900 dark:to-zinc-800 p-4">
-      <div className="absolute top-4 right-4 px-4 py-2 bg-purple-600/10 dark:bg-purple-400/10 rounded-lg">
+    <div className="relative min-h-screen w-full overflow-hidden">
+      {/* Hero Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-white dark:from-zinc-900 dark:to-zinc-800">
+        <div className="absolute inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
+      </div>
+
+      {/* Points Display */}
+      <div className="absolute top-4 right-4 px-4 py-2 bg-white/10 backdrop-blur-sm border border-purple-200/20 dark:border-purple-800/20 rounded-lg shadow-lg">
         <span className="text-purple-600 dark:text-purple-400 font-medium">Points: {points}</span>
       </div>
 
+      {/* Back Button */}
       <Button
         onClick={() => router.back()}
         variant="ghost"
-        className="absolute top-4 left-4 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300"
+        className="absolute top-4 left-4 text-purple-600 hover:text-purple-700 hover:bg-purple-600/10 dark:text-purple-400 dark:hover:text-purple-300 backdrop-blur-sm"
       >
         <ChevronLeft className="h-4 w-4 mr-2" />
         Back
       </Button>
 
-      <div className="w-full max-w-4xl">
+      <div className="relative w-full max-w-4xl mx-auto p-4">
+        {/* Title Section */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-12 pt-16"
         >
           <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
             {title || "Fill in the Blanks"}
           </h2>
-          <p className="text-xl text-purple-600/70 dark:text-purple-400/70 mt-2">
+          <p className="text-xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600/70 to-blue-600/70 mt-2">
             Select two cards to fill in the missing words
           </p>
         </motion.div>
 
+        {/* Game Section */}
         <motion.div 
           className="space-y-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div className="bg-white/50 dark:bg-zinc-800/50 border border-purple-200/50 dark:border-purple-800/50 rounded-xl p-6 shadow-lg backdrop-blur-sm">
-            <p className="text-purple-900 dark:text-purple-100 mb-4 text-lg text-center">
+          <div className="bg-white/30 dark:bg-zinc-800/30 border border-purple-200/50 dark:border-purple-800/50 rounded-xl p-6 shadow-lg backdrop-blur-md">
+            <p className="text-purple-900 dark:text-purple-100 mb-4 text-lg text-center font-medium">
               {currentQuestion?.question || "Loading question..."}
             </p>
             
+            {/* Cards Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
               {currentQuestion?.options.map((word, index) => (
                 <motion.div
@@ -115,19 +136,19 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
                   className={`cursor-pointer p-4 rounded-xl text-center transition-all duration-300
                     ${selectedCards.includes(word)
                       ? checkAnswer()
-                        ? 'bg-green-500/10 border-green-500/50 shadow-green-500/10'
-                        : 'bg-purple-500/10 border-purple-500/50 shadow-purple-500/10'
-                      : 'bg-white/50 dark:bg-zinc-900/50 border-purple-200/50 dark:border-purple-800/50 hover:border-purple-400/50'}
-                    border backdrop-blur-sm`}
+                        ? 'bg-gradient-to-br from-green-500/20 to-green-600/20 border-green-500/50'
+                        : 'bg-gradient-to-br from-purple-500/20 to-blue-500/20 border-purple-500/50'
+                      : 'bg-white/40 dark:bg-zinc-900/40 border-purple-200/50 dark:border-purple-800/50 hover:border-purple-400/50'}
+                    border backdrop-blur-sm hover:shadow-lg`}
                   onClick={() => !fixedCards.includes(word) && handleCardClick(word)}
-                  whileHover={{ scale: fixedCards.includes(word) ? 1 : 1.05 }}
-                  whileTap={{ scale: fixedCards.includes(word) ? 1 : 0.95 }}
+                  whileHover={{ scale: fixedCards.includes(word) ? 1 : 1.02 }}
+                  whileTap={{ scale: fixedCards.includes(word) ? 1 : 0.98 }}
                 >
-                  <p className={`text-sm md:text-base ${
+                  <p className={`text-sm md:text-base font-medium ${
                     selectedCards.includes(word)
                       ? checkAnswer()
                         ? 'text-green-600 dark:text-green-400'
-                        : 'text-purple-600 dark:text-purple-400'
+                        : 'bg-clip-text text-transparent bg-gradient-to-br from-purple-600 to-blue-600'
                       : 'text-purple-900 dark:text-purple-100'
                   }`}>
                     {word}
@@ -136,16 +157,24 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
               ))}
             </div>
 
+            {/* Answer Feedback */}
             {selectedCards.length === 2 && (
-              <div className={`mt-6 text-center text-lg ${
-                checkAnswer() ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-              }`}>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mt-6 text-center text-lg font-medium ${
+                  checkAnswer() 
+                    ? 'bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-green-600'
+                    : 'bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-600'
+                }`}
+              >
                 {checkAnswer() ? 'Correct!' : 'Try again!'}
-              </div>
+              </motion.div>
             )}
           </div>
         </motion.div>
 
+        {/* Action Buttons */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -153,9 +182,9 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
           className="flex justify-center mt-8 gap-4"
         >
           <Button
-            onClick={clearPDF}
-            variant="ghost"
-            className="text-purple-600 hover:text-purple-700 hover:bg-purple-600/10 dark:text-purple-400 dark:hover:text-purple-300 dark:hover:bg-purple-400/10"
+            onClick={handleNewPDF}
+            variant="outline"
+            className="border-purple-200/50 dark:border-purple-800/50 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-purple-600 dark:text-purple-400 backdrop-blur-sm"
           >
             <RotateCw className="h-4 w-4 mr-2" />
             New PDF
@@ -164,7 +193,7 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
           {checkAnswer() && (
             <Button
               onClick={resetGame}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-lg hover:shadow-purple-500/25"
             >
               <ArrowRight className="h-4 w-4 mr-2" />
               Next Question
@@ -174,4 +203,4 @@ export default function FillInBlanks({ title, questions, clearPDF }: FillInBlank
       </div>
     </div>
   );
-} 
+}

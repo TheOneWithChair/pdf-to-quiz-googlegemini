@@ -103,7 +103,7 @@ export default function Matching({
           <p className="text-muted-foreground">
             There was an issue generating the matching exercise. Please try again.
           </p>
-          <Button onClick={clearPDF} variant="outline" className="w-full">
+          <Button onClick={clearPDF} variant="outline" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
             <FileText className="mr-2 h-4 w-4" />
             Upload New PDF
           </Button>
@@ -136,7 +136,7 @@ export default function Matching({
               <RefreshCw className="mr-2 h-4 w-4" />
               Try Again
             </Button>
-            <Button onClick={clearPDF} variant="outline" className="w-full">
+            <Button onClick={clearPDF} variant="outline" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
               <FileText className="mr-2 h-4 w-4" />
               Upload New PDF
             </Button>
