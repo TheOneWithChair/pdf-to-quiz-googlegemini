@@ -1,0 +1,53 @@
+# Node modules
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Log files
+*.log
+
+# Dependency directories
+**/node_modules/
+
+# System files
+.DS_Store
+*.swp
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+
+# npm package lock files
+# package-lock.json
+# yarn.lock
+
+# Next.js cache files
+.next/cache/
+
+# Storybook build output
+storybook-static/
+
+# TypeScript build output
+*.tsbuildinfo
+
+# Miscellaneous
+*.tgz
+*.gzip
+*.gz
+*.zip
+
+# Sensitive files
+*.pem
+*.key
+*.crt
+*.csr
