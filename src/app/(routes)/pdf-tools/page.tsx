@@ -1,4 +1,4 @@
-
+"use client"; 
 
 import { useState } from "react";
 import { experimental_useObject } from "ai/react";
