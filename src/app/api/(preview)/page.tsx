@@ -24,7 +24,7 @@ import NextLink from "next/link";
 import { generateQuizTitle, generateFlashcardsTitle, generateMatchingTitle } from "./actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { VercelIcon, GitIcon } from "@/components/icons";
-import { createContext } from 'react';
+
 export default function ChatWithFiles() {
   const [files, setFiles] = useState<File[]>([]);
   const [questions, setQuestions] = useState<z.infer<typeof questionsSchema>>(
