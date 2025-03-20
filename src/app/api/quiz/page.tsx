@@ -21,7 +21,7 @@ import Flashcards from "@/components/flashcards";
 import Matching from "@/components/matching";
 import { Link } from "@/components/ui/link";
 import NextLink from "next/link";
-import { generateQuizTitle, generateFlashcardsTitle, generateMatchingTitle } from "../(preview)/actions";
+import { generateQuizTitle, generateFlashcardsTitle, generateMatchingTitle } from "@/app/api/(preview)/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { VercelIcon, GitIcon } from "@/components/icons";
 import FillInBlanks from "@/components/fill-in-blanks";
