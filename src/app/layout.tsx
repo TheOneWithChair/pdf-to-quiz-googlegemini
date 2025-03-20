@@ -1,13 +1,14 @@
+// src/app/api/(preview)/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter } from "next/font/google"; // Use Inter or another Google font
 import "./globals.css";
 import { twMerge } from "tailwind-merge";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Startup Landing Page",
-  description: "A landing page for an AI startup created with Frontend Tribe",
+  title: "Pdf-to-quiz",
+  description: "An AI powered quiz learning platform",
 };
 
 export default function RootLayout({
