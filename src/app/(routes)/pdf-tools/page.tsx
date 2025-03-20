@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useState } from "react";
 import { experimental_useObject } from "ai/react";
@@ -21,7 +21,7 @@ import Flashcards from "@/components/flashcards";
 import Matching from "@/components/matching";
 import { Link } from "@/components/ui/link";
 import NextLink from "next/link";
-import { generateQuizTitle, generateFlashcardsTitle, generateMatchingTitle } from "./actions";
+import { generateQuizTitle, generateFlashcardsTitle, generateMatchingTitle } from "../../api/(preview)/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { VercelIcon, GitIcon } from "@/components/icons";
 
