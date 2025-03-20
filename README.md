@@ -2,8 +2,6 @@
 
 An AI-powered learning tool that automatically converts PDF documents into interactive quizzes, flashcards, and matching exercises using Google's Gemini Pro AI model and Next.js.  
 
-![PDF to Quiz Generator Screenshot](https://example.com/screenshot.png)  
-
 ## 🚀 Features  
 
 - **📝 PDF Parsing:** Upload any PDF document to extract content for learning material generation.  
@@ -35,7 +33,7 @@ An AI-powered learning tool that automatically converts PDF documents into inter
 
 Clone the repository:  
 ```sh
-git clone https://github.com/yourusername/pdf-to-quiz-googlegemini.git
+git clone https://github.com/TheOneWithChair/pdf-to-quiz-googlegemini.git
 cd pdf-to-quiz-googlegemini
 ```
 
@@ -96,8 +94,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 📞 Contact  
 
-**Your Name** - [your.email@example.com](mailto:your.email@example.com)  
+**Your Name** - [charitasrig@gmail.com](mailto:charitasrig@gmail.com)  
 
-📌 **Project Link:** [GitHub Repository](https://github.com/yourusername/pdf-to-quiz-googlegemini)  
+📌 **Project Link:** [GitHub Repository](https://github.com/TheOneWithChair/pdf-to-quiz-googlegemini)  
 
 🚀 **Live Deployment:** [Vercel App](https://pdf-to-quiz-googlegemini.vercel.app)  
